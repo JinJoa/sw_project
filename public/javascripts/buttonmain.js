@@ -10,6 +10,7 @@ var shutda = {
 		
         $("#call_button").click(function(){
             socket.emit('callbutton',{data:"콜버튼 누름!"});
+            socket.emit('callprice',$("#callprice").value);
         });
 
         $("#die_button").click(function(){

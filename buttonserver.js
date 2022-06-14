@@ -25,6 +25,9 @@ io.on('connection', function(socket){
     socket.on("callbutton",function(data) {
 		console.log(data);
 	});
+    socket.on("callprice",function(data) {
+		console.log(data);
+	});
 
     socket.on("diebutton",function(data) {
 		console.log(data);
@@ -47,7 +50,7 @@ io.on('connection', function(socket){
 	});
 });
 
-http.listen(3000, function(){ //4
+http.listen(3000, function(){
     console.log('server on!');
   });
 
