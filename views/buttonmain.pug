@@ -2,9 +2,7 @@ extends buttonlayout
 
 block content
  h1= title
- p 
-  font(color='DodgerBlue') #{username}
-  | 님 환영합니다.
+ h2#Money
  
  #game
   #shutda
@@ -16,20 +14,18 @@ block content
     input#double_button(type='button', value='더블')
 
     div#Call(display="none")
-     p 콜 비용을 입력해주세요:
-     p 
-        input#callprice(type="text" value='')
+     p 배팅 전 판돈:
+     p#Stakes 
+        
     div#Total(display="none")
-     p 총액을 입력해주세요:
-     p 
-        input#totalprice(type="text" value='')
+     p 배팅 금액(=콜비용):
+     p#CallCost 
+       
 
     div#Betting(display="none")
-     p 배팅금액을 입력해주세요:
-     p 
-        input#bettingprice(type="text" value='')
-     p 
-        input#send(type="submit" value="Submit")
+     p 배팅 후 판돈:
+     p#restake 
+      
     #user
      #list
      #logs
