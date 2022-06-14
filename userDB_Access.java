@@ -44,10 +44,10 @@ public class userDB_Access {
 		return -2; 			//�����ͺ��̽� ����
 	}
 	
-	public int Ranking_list(){
-		String SQL = "SELECT userID, account from USER ORDER BY account DESC"
+	public ArrayList<user> Ranking_list(){
+		String SQL = "SELECT userID, account from USER ORDER BY account DESC";
 		pstat = conn.prepareStatement(SQL);
-		result = stat.executeQuery();
+		result = pstat.executeQuery();
 	}
 	
 	public int signup(User user) {
@@ -56,7 +56,7 @@ public class userDB_Access {
 			pstat = conn.prepareStatement(SQL);
 			pstat.setString(1, user.getUserID());
 			pstat.setString(2, user.getUserPassword());
-			pstat.setString(3, 500);
+			pstat.setInt(3, 500);
 			return pstat.executeUpdate();			//0�̻��� ���� ��ȯ
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,9 +65,9 @@ public class userDB_Access {
 	}
 
 	public int UpdateAccount(String userID, int account) {
-		String SQL = "UPDATE USER SET account = ? WHERE userID = ?"
+		String SQL = "UPDATE USER SET account = ? WHERE userID = ?";
 		pstat = conn.prepareStatement(SQL);
-		pstat.setString(1, account);
+		pstat.setInt(1, account);
 		pstat.setString(2, userID);
 	}
 
@@ -76,8 +76,10 @@ public class userDB_Access {
 		try {
 			pstat = conn.prepareStatement(SQL);
 			pstat.setString(1, user.getUserID());
-			return 1			//0�̻��� ���� ��ȯ
+			return 1;			//0�̻��� ���� ��ȯ
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return -1;			//�����ͺ��̽� ����
+	}
+}
