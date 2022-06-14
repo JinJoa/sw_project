@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 //================================DB�� ������ �� ���� �޼������ ��Ƴ��� Ŭ����==============================
 public class userDB_Access {
 	
@@ -44,10 +45,25 @@ public class userDB_Access {
 		return -2; 			//�����ͺ��̽� ����
 	}
 	
-	public ArrayList<user> Ranking_list(){
+	public ArrayList<User> Ranking_list(){
 		String SQL = "SELECT userID, account from USER ORDER BY account DESC";
-		pstat = conn.prepareStatement(SQL);
-		result = pstat.executeQuery();
+		ArrayList<User> Rank = new ArrayList<User>(); 
+		try {
+			pstat = conn.prepareStatement(SQL);
+
+			result = pstat.executeQuery();
+			while(result.next()) { //데이터 가져오기
+				User user = new User();
+				user.setUserID(result.getString(1));
+				user.setAccount(result.getInt(2));
+				Rank.add(user);
+			}
+			return Rank;
+		
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return Rank;
 	}
 	
 	public int signup(User user) {
@@ -66,9 +82,15 @@ public class userDB_Access {
 
 	public int UpdateAccount(String userID, int account) {
 		String SQL = "UPDATE USER SET account = ? WHERE userID = ?";
-		pstat = conn.prepareStatement(SQL);
-		pstat.setInt(1, account);
-		pstat.setString(2, userID);
+		try {
+			pstat = conn.prepareStatement(SQL);
+			pstat.setInt(1, account);
+			pstat.setString(2, userID);
+			return 1;
+		} catch (Exception e){
+		e.printStackTrace();
+		}
+	return -1;
 	}
 
 	public int delUser(User user) {
