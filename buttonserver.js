@@ -32,6 +32,15 @@ io.on('connection', function(socket){
 	   
     socket.on("callbutton",function(data) {
 		console.log(data);
+		console.log('배팅 전 판돈 '+stakes + '만원');
+		callcost = Math.ceil(callcost); //콜을위한 데이터
+
+		stakes = Math.ceil(stakes + callcost); //판돈
+	
+		console.log('배팅금액(=콜비용)' + callcost + '만원');
+		console.log('배팅 후 판돈 '+stakes + '만원');
+	
+		checkCall = 0; //레이즈시 call인덱스 초기화
 	});
 
     socket.on("diebutton",function(data) {
@@ -113,7 +122,7 @@ io.on('connection', function(socket){
 	});
 });
 
-http.listen(5000, function(){ //4
+http.listen(4000, function(){ //4
     console.log('server on!');
   });
 
