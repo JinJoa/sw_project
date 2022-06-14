@@ -12,7 +12,7 @@ app.engine('pug',require('pug').__express);
 app.set('view engine', 'pug');
 
 
-
+//셧다게임
 app.get('/', (req, res) => {  
 	res.render('main', { title: '온라인 섯다 게임', username: req.query.username });
 });
