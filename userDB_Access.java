@@ -1,8 +1,8 @@
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 //================================DB�� ������ �� ���� �޼������ ��Ƴ��� Ŭ����==============================
 public class userDB_Access {
 	
@@ -45,10 +45,25 @@ public class userDB_Access {
 		return -2; 			//�����ͺ��̽� ����
 	}
 	
-	public int Ranking_list(){
-		String SQL = "SELECT userID, account from USER ORDER BY account DESC"
-		pstat = conn.prepareStatement(SQL);
-		result = stat.executeQuery();
+	public ArrayList<User> Ranking_list(){
+		String SQL = "SELECT userID, account from USER ORDER BY account DESC";
+		ArrayList<User> Rank = new ArrayList<User>(); 
+		try {
+			pstat = conn.prepareStatement(SQL);
+
+			result = pstat.executeQuery();
+			while(result.next()) { //데이터 가져오기
+				User user = new User();
+				user.setUserID(result.getString(1));
+				user.setAccount(result.getInt(2));
+				Rank.add(user);
+			}
+			return Rank;
+		
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return Rank;
 	}
 	
 	public int signup(User user) {
@@ -57,7 +72,7 @@ public class userDB_Access {
 			pstat = conn.prepareStatement(SQL);
 			pstat.setString(1, user.getUserID());
 			pstat.setString(2, user.getUserPassword());
-			pstat.setString(3, 500);
+			pstat.setInt(3, 500);
 			return pstat.executeUpdate();			//0�̻��� ���� ��ȯ
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,10 +81,16 @@ public class userDB_Access {
 	}
 
 	public int UpdateAccount(String userID, int account) {
-		String SQL = "UPDATE USER SET account = ? WHERE userID = ?"
-		pstat = conn.prepareStatement(SQL);
-		pstat.setString(1, account);
-		pstat.setString(2, userID);
+		String SQL = "UPDATE USER SET account = ? WHERE userID = ?";
+		try {
+			pstat = conn.prepareStatement(SQL);
+			pstat.setInt(1, account);
+			pstat.setString(2, userID);
+			return 1;
+		} catch (Exception e){
+		e.printStackTrace();
+		}
+	return -1;
 	}
 
 	public int delUser(User user) {
@@ -77,7 +98,7 @@ public class userDB_Access {
 		try {
 			pstat = conn.prepareStatement(SQL);
 			pstat.setString(1, user.getUserID());
-			return 1			//0�̻��� ���� ��ȯ
+			return 1;			//0�̻��� ���� ��ȯ
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
