@@ -10,7 +10,6 @@ var shutda = {
 		
         $("#call_button").click(function(){
             socket.emit('callbutton',{data:"콜버튼 누름!"});
-            socket.emit('callprice',$("#callprice").value);
         });
 
         $("#die_button").click(function(){
@@ -20,6 +19,22 @@ var shutda = {
         $("#allin_button").click(function(){
             socket.emit('allinbutton',{data:"올인버튼 누름!"});
         });
+
+        $("#double_button").click(function(){
+            socket.emit('doublebutton',{data:"더블버튼 누름!"});
+        });
+
+        $("#qua_button").click(function(){
+            socket.emit('quabutton',{data:"쿼터버튼 누름!"});
+        });
+
+        $("#half_button").click(function(){
+            socket.emit('halfbutton',{data:"하프버튼 누름!"});
+        });
+
+        $("#send").click(function(){
+            socket.emit('price',$('#callprice').val());
+        })
 
 	}
 	// init 끝	

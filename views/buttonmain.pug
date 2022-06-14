@@ -11,10 +11,24 @@ block content
     input#call_button(type='button', value='콜')
     input#allin_button(type='button', value='올인')
     input#die_button(type='button', value='다이')
-    p 콜 비용을 입력해주세요:
-    p 
-        input#callprice(type="text")
-    p 
+    input#half_button(type='button', value='하프')
+    input#qua_button(type='button', value='쿼터')
+    input#double_button(type='button', value='더블')
+
+    div#Call(display="none")
+     p 콜 비용을 입력해주세요:
+     p 
+        input#callprice(type="text" value='')
+    div#Total(display="none")
+     p 총액을 입력해주세요:
+     p 
+        input#totalprice(type="text" value='')
+
+    div#Betting(display="none")
+     p 배팅금액을 입력해주세요:
+     p 
+        input#bettingprice(type="text" value='')
+     p 
         input#send(type="submit" value="Submit")
     #user
      #list

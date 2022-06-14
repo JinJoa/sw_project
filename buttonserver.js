@@ -37,6 +37,22 @@ io.on('connection', function(socket){
 		console.log(data);
 	});
 
+	socket.on("doublebutton",function(data) {
+		console.log(data);
+	});
+
+	socket.on("halfbutton",function(data) {
+		console.log(data);
+	});
+
+	socket.on("quabutton",function(data) {
+		console.log(data);
+	});
+
+	socket.on("price",function(data) {
+		console.log(data);
+	});
+
 	
 	socket.on('disconnect', function() {
 		console.log('user disconnected : ', socket.id, socket.username);
