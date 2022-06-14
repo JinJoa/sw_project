@@ -1,0 +1,54 @@
+<?php
+        include "dbcon.php";
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <title>회원가입</title>
+        <link rel="stylesheet" type="text/css" href="./signUp.css">
+</head>
+<body>
+        <form class = "loginForm" method="post" action="signUP.php">
+                <h2>회원가입</h2>
+                        <fieldset>
+                                        <table class="signUp">
+                                                <tr>
+                                                        <td class="index">아이디</td>
+                                                </tr>
+                                                <tr>
+                                                        <td><input type="text" size="35" name="userid" placeholder="아이디"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="index">비밀번호</td>
+                                                </tr>
+                                                <tr>
+                                                        <td><input type="password" size="35" name="userpw" placeholder="비밀번호"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="index">이름</td>
+                                                </tr>
+                                                <tr>
+                                                         <td><input type="text" size="35" name="name" placeholder="이름"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="index">전화번호</td>
+                                                </tr>
+                                                <tr>
+                                                        <td><input type="text" size="35" name="tel" placeholder="TEL"></td>
+                                                </tr>
+                                                <tr>
+                                                        
+                                                        <td>남<input type="radio" name="sex" value= 1 > 여<input type="radio" name="sex" value= 0 ></td>
+                                        </table>
+
+                                <input type="submit" class="btn" value="가입하기" /><input type="reset" class="btn" value="다시쓰기" />
+
+                </fieldset>
+	</form>
+
+	</br><input type="button" onclick="location.href='login.php'"  value="돌아가기" >
+</body>
+</html>
+
