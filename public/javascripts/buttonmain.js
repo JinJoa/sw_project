@@ -20,6 +20,18 @@ var shutda = {
             socket.emit('allinbutton',{data:"올인버튼 누름!"});
         });
 
+        $("#half_button").click(function(){
+            socket.emit('halfbutton',{data:"하프 누름!"});
+        });
+
+        $("#quarter_button").click(function(){
+            socket.emit('quarterbutton',{data:"쿼터 누름!"});
+        });
+
+        $("#double_button").click(function(){
+            socket.emit('doublebutton',{data:"더블 누름!"});
+        });
+
 	}
 	// init 끝	
 
