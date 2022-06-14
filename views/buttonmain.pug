@@ -1,0 +1,17 @@
+extends buttonlayout
+
+block content
+ h1= title
+ p 
+  font(color='DodgerBlue') #{username}
+  | 님 환영합니다.
+ 
+ #game
+  #shutda
+    input#call_button(type='button', value='콜')
+    input#allin_button(type='button', value='올인')
+    input#die_button(type='button', value='다이')
+    #user
+     #list
+     #logs
+    //input#username(type='hidden', value= username)
