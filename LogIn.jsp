@@ -1,7 +1,5 @@
 
-<?php
-
-include('dbcon.php');
+<%
 
 	if(isset($_POST['uid'])&&isset($_POST['pwd'])){
 		$userid=$_POST['uid'];
@@ -10,52 +8,43 @@ include('dbcon.php');
 		if($userid==NULL || $userpw==NULL)
                 {
 			echo "<script>alert('빈칸을 모두 채워주세요');</script>";
-			echo("<script>location.href='login.php';</script>");
+			echo("<script>location.href='login.php'</script>");
                 }
 
-
-
-
-		$sql = "SELECT * FROM customer where CUS_ID='$userid' and CUS_PW='$userpw'";
+			userDB_Access UserDAO = new userDB_Access(); //DB엑세스 객체 생성
+			int result = UserDAO.login($userID, $userpw);//로그인 시도 후 결과를 저장.
 		
-		$stid = oci_parse($connect,$sql);
-
-		oci_execute($stid);
-
-		
-		if($row = oci_fetch_array($stid,OCI_ASSOC+OCI_RETURN_NULLS)){
-
-			$_SESSION['user_id'] = $userid;
-			
-			//admin 권한에 따른 is_admin확인			
-			if($userid == 'admin'){
-                                $_SESSION['is_admin'] = 1;
-                        }
-                        else{
-                                $_SESSION['is_admin'] = 0;
-                        }
-			
-			
-			echo "사용자 이름:  $userid";
-
-			echo "<script>alert('-로그인성공-');</script>";
-
-			oci_free_statement($stid);
-        	        oci_close($connect);
+		if(result == 1){ //로그인 성공.
+			session.setAttribute("userID", user.getUserID());//현재 접속 중인 사용자를 관리하기 위한 세션부여
+			PrintWriter script = response.getWriter();
+			echo("<script>location.href = 'buttonmain.js'</script>");
+		}
+		else if(result == 0){ //비밀번호 틀렸을 때
+			PrintWriter script = response.getWriter();
+			echo("<script>alert('비밀번호가 틀립니다.')
+			history.back()
+			</script>");
+		}
+		else if(result == -1){ //아이디가 틀렸을 때
+			PrintWriter script = response.getWriter();
+			echo("<script>
+			alert('존재하지 않는 아이디입니다.')
+			history.back()
+			</script>");
+		}
+		else if(result == -2){ //DB오류가 발생했을 때.
+			PrintWriter script = response.getWriter();
+			echo("<script>
+			alert('DB오류가 발생했습니다.')
+			history.back()
+			</script>");
+		}
 	
-			echo("<script>location.replace('main.php');</script>");
-		}
-		else{
-			echo "<script>alert('-로그인실패-\\r\\n아이디  $userid 가 존재하지 않거나 비밀번호가 틀립니다.');</script>";
-		}
+		
 
 
-		oci_free_statement($stid);
-		oci_close($connect);	
-	}
 
-
-?>
+%>
 
 
 
